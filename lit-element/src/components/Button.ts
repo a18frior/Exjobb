@@ -16,7 +16,15 @@ export class Button extends LitElement {
                 border: 0;
             }
         </style>
-        <button>${this.label}</button>
+        <button @click="${this.onClick?.bind(this)}">${this.label}</button>
     `;
+  }
+
+  private onClick() {
+    this.dispatchEvent(new CustomEvent('fridasClick', {
+      detail: {
+        message: 'This is some message'
+      }
+    }));
   }
 }
