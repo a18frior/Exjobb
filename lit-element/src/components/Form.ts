@@ -1,19 +1,27 @@
 import { LitElement, html, customElement } from 'lit-element';
+import './components/Button';
 
 @customElement('frida-form')
 export class Form extends LitElement {
+  
 
   render() {
     return html`
         <style>
             :host {
-                display: inline-block;
-                background: blueviolet;
-                padding: 0.5rem;
-                border: 0;
+                display:flex;
+                flex-direction: column;
+                padding:30px;
+                width:450px;
+                background-color:lightblue;
+                align-items:flex-start;
+
             }
+            
+             
         </style>
         <form><slot></slot></form>
-    `;
-  }
+    `;}
+    
+
 }

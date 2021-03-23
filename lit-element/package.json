@@ -9,7 +9,7 @@
     "build": "npm run copy-html && npm run build:webpack",
     "build:webpack": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "copy-html": "copyfiles -f src/index.html webapp"
+    "copy-html": "copyfiles -f src/webapp/index.html"
   },
   "author": "",
   "license": "ISC",

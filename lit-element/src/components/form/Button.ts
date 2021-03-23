@@ -1,5 +1,6 @@
 import { LitElement, html, property, customElement } from 'lit-element';
 
+
 @customElement('frida-button')
 export class Button extends LitElement {
   @property() label = null;
@@ -7,24 +8,26 @@ export class Button extends LitElement {
   render() {
     return html`
         <style>
-            :host {
-                display: inline-block;
-            }
+            
             button {
-                background: blueviolet;
+                background: whitesmoke;
                 padding: 0.5rem;
                 border: 0;
             }
         </style>
-        <button @click="${this.onClick?.bind(this)}">${this.label}</button>
+        <button @focus="${this.onFocus.bind(this)}">${this.label}</button>
     `;
   }
 
-  private onClick() {
-    this.dispatchEvent(new CustomEvent('fridasClick', {
+  private onFocus() {
+    this.dispatchEvent(new CustomEvent('fridasFocus', {
       detail: {
         message: 'This is some message'
       }
     }));
   }
+
+  
+
+
 }

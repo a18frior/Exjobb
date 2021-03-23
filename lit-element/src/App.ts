@@ -1,50 +1,38 @@
 import { LitElement, html, customElement } from 'lit-element';
-import './components/Button';
+import './components/form/Button';
+import './components/Input'; 
 import './components/Form';
+import './components/Sidecolumns'; 
+import './components/mainColumn'; 
 
 @customElement('frida-app')
 export class App extends LitElement {
-  private buttonClickCount = 0;
-  private view = 'home';
+ 
 
   render() {
-    if(this.view === 'home') {
+    {
       return html`
       <style>
           frida-button {
               margin: 1rem;
-              
           }
-         
-      </style>
-      <frida-form .input="${'skriv'}">
-        <frida-button
-          @fridasClick="${() => {
-                this.buttonClickCount++;
-                this.view = 'other';
-                this.requestUpdate();
-        }}"
-          .label="${'Click on me!'}">
-        </frida-button>
-          ${this.buttonClickCount}
+          :host{width:100%;
+          display: flex;
+          flex-direction:block;}
+               </style>
+          
+      
+      <side-column></side-column>
+      <main-column>
+      <frida-form>
+      <frida-input></frida-input>
       </frida-form>
+      </main-column>
+      <side-column></side-column>
+      
   `;  
     }
-    //             @fridasClick="${(event: CustomEvent) => console.log(event.detail.message)}"
-    return html`
-        <style>
-            :host {
-                margin: 10rem;
-                background: green;
-                
-            }
-           
-        </style>
-          <frida-button
-            @fridasClick="${() => this.buttonClickCount++ && this.requestUpdate()}"
-            .label="${'Click on me!'}">
-          </frida-button>
-            ${this.buttonClickCount}
-    `;
+            
+    
   }
 }

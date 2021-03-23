@@ -2,9 +2,7 @@ const Path = require('path');
 
 module.exports = {
 	mode: 'development',
-	entry: {
-		'app': Path.resolve('src/App.jsx')
-	},
+	entry: Path.resolve('src/App.jsx'),
     devtool: 'inline-source-map',
     resolve: {
       extensions: [".jsx", ".js"]
@@ -25,7 +23,7 @@ module.exports = {
 
 	output: {
 		path: Path.resolve('webapp'),
-		filename: '[name].js',
+		filename: 'app.js',
 		publicPath: ''
 	},
 

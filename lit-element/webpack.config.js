@@ -2,27 +2,25 @@ const Path = require('path');
 
 module.exports = {
 	mode: 'development',
-	entry: {
-		'app': Path.resolve('src/App.ts')
-	},
+	entry: Path.resolve('src/App.ts'),
     devtool: 'inline-source-map',
     resolve: {
-      // Add `.ts` and `.tsx` as a resolvable extension.
-      extensions: [".ts", ".tsx", ".js"]
+      extensions: [".ts", ".js", ".html"]
     },
 	module: {
-        rules: [
-            {
-                test: /\.ts?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/
-            }
-        ]
+		rules: [
+			{
+			  test: /\.(ts)$/,
+			  exclude: /node_modules/,
+			  loader: 'ts-loader'
+			}
+			
+		  ]
 	},
 
 	output: {
 		path: Path.resolve('webapp'),
-		filename: '[name].js',
+		filename: 'app.js',
 		publicPath: ''
 	},
 
