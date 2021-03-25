@@ -1,5 +1,5 @@
 import { LitElement, html, customElement } from 'lit-element';
-import './components/form/Button';
+import './components/Button';
 import './components/Input'; 
 import './components/Form';
 import './components/Sidecolumns'; 

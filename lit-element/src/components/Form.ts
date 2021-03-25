@@ -1,5 +1,5 @@
 import { LitElement, html, customElement } from 'lit-element';
-import './components/Button';
+
 
 @customElement('frida-form')
 export class Form extends LitElement {
