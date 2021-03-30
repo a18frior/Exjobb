@@ -4,6 +4,8 @@ import './components/Input';
 import './components/Form';
 import './components/Sidecolumns'; 
 import './components/mainColumn'; 
+import './components/Post';
+import './components/contextfreegrammar';
 
 @customElement('frida-app')
 export class App extends LitElement {
@@ -27,6 +29,12 @@ export class App extends LitElement {
       <frida-form>
       <frida-input></frida-input>
       </frida-form>
+      </main-column>
+      <side-column></side-column>
+      
+      <side-column></side-column>
+      <main-column>
+       <frida-post></frida-post>
       </main-column>
       <side-column></side-column>
       

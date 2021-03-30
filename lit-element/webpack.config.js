@@ -1,3 +1,4 @@
+
 const Path = require('path');
 
 module.exports = {
@@ -30,4 +31,5 @@ module.exports = {
 		port: 8080,
 		disableHostCheck: true
 	}
+	
 };
