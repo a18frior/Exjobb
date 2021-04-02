@@ -11,11 +11,11 @@ var adverb=new Array("grossly","incoherently","well","inevitably","bluntly","sup
 
 // Returns a random integer between min (included) and max (excluded)
 // Using Math.round() will give you a non-uniform distribution!
-function getRandomInt(min, max) {
+export function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function edify(word){
+export function edify(word){
 	var subs=word.slice(-1);
 	if(subs!="e"){
 			return "ed";
@@ -24,7 +24,7 @@ function edify(word){
 	}
 }
 
-function randomword(list,distribution){
+export function randomword(list,distribution){
 	if(distribution){
 		var r = getRandomInt(0,list.length+1);
 		return list[r];			
@@ -41,7 +41,7 @@ function randomword(list,distribution){
  *
  * Replaces term "search" with "replace" at the first occurrence after position "n" in string "subject"
  */
-function replacen(search,replace,subject,n){
+export function replacen(search,replace,subject,n){
 	var foundpos=0;	
 	var beforestr="";
 	var afterstr="";
@@ -60,7 +60,7 @@ function replacen(search,replace,subject,n){
 	
 }
 
-function countfinds(search,subject){
+export function countfinds(search,subject){
 
 	var n = 0;
 	var count = 0;
@@ -80,7 +80,7 @@ function countfinds(search,subject){
  * replace term "placeholder" with a random word from "set" using the distribution "distribution" in string "sentence
  *
  */
-function replacerandom(placeholder,set,distribution,sentence){
+export function replacerandom(placeholder,set,distribution,sentence){
 	var found=countfinds(placeholder,sentence);			
 	for(var i=0;i<found;i++){
 		sentence=replacen(placeholder,randomword(set,distribution),sentence,0);					
@@ -114,7 +114,7 @@ function replacerandom(placeholder,set,distribution,sentence){
  * To get normal distribution squared, set parameter to "null"
  * TODO: Add a Beta Prime distribution.
  */	
-function generate_sentence(probnounphrase,probverbphrase,probdualajdectives,probstartadj,distributionnouns,distributionverbs,distributionadjectives,distributionadverbs,distributiondeterminers,distributionconjunctions,distributionmodals) {
+export function generate_sentence(probnounphrase,probverbphrase,probdualajdectives,probstartadj,distributionnouns,distributionverbs,distributionadjectives,distributionadverbs,distributiondeterminers,distributionconjunctions,distributionmodals) {
 	
 //		var noun,verb,determiner,adjective,adverb,conjunction,modal;
 
@@ -173,7 +173,7 @@ function generate_sentence(probnounphrase,probverbphrase,probdualajdectives,prob
 	}
 
 	// Replace all verbphrases with "verb" or "adverb verb"			
-	nonounphrases=countfinds("[verbphrase]",sentence);			
+	var nonounphrases=countfinds("[verbphrase]",sentence);			
 	for(i=0;i<nonounphrases;i++){
 		if((getRandomInt(0, 100)/100.0)>=probverbphrase){
 				sentence=replacen("[verbphrase]","[verb]",sentence,0);					
@@ -183,7 +183,7 @@ function generate_sentence(probnounphrase,probverbphrase,probdualajdectives,prob
 	}
 	
 	// Replace some adjectives with two adjectives
-	adjectives=countfinds("[adjective]",sentence);			
+	var adjectives=countfinds("[adjective]",sentence);			
 	for(var i=0;i<adjectives;i++){
 		if((getRandomInt(0, 100)/100.0)>=probdualajdectives){
 			sentence=replacen("[adjective]","[dual adjective]",sentence,0);					
@@ -192,7 +192,7 @@ function generate_sentence(probnounphrase,probverbphrase,probdualajdectives,prob
 	
 	// Replace all dual adjectives with two adjectives
 	// One alternative to this is to insert an "and" between the two adjectives
-	dualadjectives=countfinds("[dual adjective]",sentence);			
+	var dualadjectives=countfinds("[dual adjective]",sentence);			
 	for(var i=0;i<dualadjectives;i++){
 		sentence=replacen("[dual adjective]","[adjective] [conjunction] [adjective]",sentence,0);					
 	}
@@ -218,15 +218,15 @@ function generate_sentence(probnounphrase,probverbphrase,probdualajdectives,prob
 	}
 
 	// Replace all nouns with a random noun
-	sentence=replacerandom("[noun]",noun,distributionnouns,sentence);			
+	var sentence=replacerandom("[noun]",noun,distributionnouns,sentence);			
 
 	// Replace all verbs with a random verb
 	// Verbs have modals
 	
 	var found=countfinds("[verb]",sentence);			
 	for(var i=0;i<found;i++){
-		replacestring=randomword(verb,distributionverbs);
-		amodal=randomword(modal,distributionmodals);
+		var replacestring=randomword(verb,distributionverbs);
+		var amodal=randomword(modal,distributionmodals);
 		
 		if(amodal=="s"){
 			replacestring+="s";

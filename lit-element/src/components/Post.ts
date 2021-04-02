@@ -1,8 +1,5 @@
 import { LitElement, html, customElement } from 'lit-element';
-import './contextfreegrammar';
-
-
-
+import * as FreeGrammar from '../libs/FreeGrammar';
 
 @customElement('frida-post')
 export class div extends LitElement {
@@ -10,8 +7,10 @@ export class div extends LitElement {
   random:any;
   sentence:any;
   heading: any ;
-  headings:Array<1000>
-  sentences: Array<1000>
+  headings:Array<1000>;
+  sentences: Array<1000>;
+  RandomInt:any;
+  genSent:any;
   
  
 
@@ -26,52 +25,36 @@ export class div extends LitElement {
       this.headings = [];
       this.sentences = [];
       this.Post();
+   
+     
       
   }
 
-   
-
     Post() {
-    
-      
 
         
         for (let index = 0; index < 1000; index++) {
-            this.random= getRandomInt(1,4);
-           for (let index = 0; index < this.random.length; index++) {
-              this.heading = generate_sentence(0.5,0.5,0.5,0.5,null,null,null,null,null,null,null);
+            this.random=  FreeGrammar.getRandomInt(1,4);
+           for (let index = 0; index < this.random; index++) {
+              this.heading = FreeGrammar.generate_sentence(0.5,0.5,0.5,0.5,null,null,null,null,null,null,null);
               this.headings.push(this.heading);
-              console.log(this.heading, this.headings);
+              
            }
         
-           this.random2=getRandomInt(3,20)
-           for (let index = 0; index < this.random2.length; index++) {
-            this.sentence = generate_sentence(0.5,0.5,0.5,0.5,null,null,null,null,null,null,null);
+           this.random2=FreeGrammar.getRandomInt(3,20);
+           for (let index = 0; index < this.random2; index++) {
+            this.sentence = FreeGrammar.generate_sentence(0.5,0.5,0.5,0.5,null,null,null,null,null,null,null);
             
              this.sentences.push(this.sentence);
             
          }
          
         }
-        
-      
-      
-      
-     
   }
-
-
-
     
   render() {
-  
-    return html`
-     
-     
-        
-       
-       <ul>${this.headings.map(item => html`<li>${item}</li>`)}</ul>
-           `;}
+    return  html`<ul>${this.headings.map(item => html`<li>${item}</li>`)}</ul>`;
+  }
 }
            
            
