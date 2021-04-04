@@ -49,7 +49,7 @@ export class Input extends LitElement {
       <p>${this.valueMessage4}</p>
       <input type="Date" label="Age" name="age" @input="${this.validateA}"  /> Date of birth:
       <p>${this.valueMessage5}</p>
-      <frida-button @click="${this.submit}" this.label="Klicka"></frida-button>
+      <frida-button @click="${this.submit}" .label="Klicka"></frida-button>
       
 
   
