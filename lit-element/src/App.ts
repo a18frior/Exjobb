@@ -4,8 +4,8 @@ import './components/Input';
 import './components/Form';
 import './components/Sidecolumns'; 
 import './components/mainColumn'; 
-import './components/Heading';
-import './components/Sentence';
+import './components/Post';
+
 
 @customElement('frida-app')
 export class App extends LitElement {
