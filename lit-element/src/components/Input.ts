@@ -49,7 +49,7 @@ export class Input extends LitElement {
       <p>${this.valueMessage4}</p>
       <input type="Date" label="Age" name="age" @input="${this.validateA}"  /> Date of birth:
       <p>${this.valueMessage5}</p>
-      <frida-button @click="${this.submit}" .label="Klicka"></frida-button>
+      <frida-button @click="${this.submit.bind(this)}" .label="Klicka"></frida-button>
       
 
   
@@ -156,14 +156,11 @@ export class Input extends LitElement {
      }
     }
     submit(){
-      if(this.greenMode==true){
-        alert("du är bäst")
-      }
-  
-      else{
-        alert("något är fel")
-      }
-    
+      this.dispatchEvent(new CustomEvent('submit', {
+        detail: {
+          email: (<HTMLInputElement>this.shadowRoot?.querySelector('input[name="email"]')).value
+        }
+      }));
     }
   
   }

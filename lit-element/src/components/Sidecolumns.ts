@@ -1,6 +1,10 @@
-import { LitElement, html, customElement } from 'lit-element';
+import { LitElement, html, customElement, property} from 'lit-element';
 @customElement('side-column')
 export class div extends LitElement {
+ 
+
+ @property({ type: 'string' })
+ public email: string|null = null;
   
 
   render() {
@@ -16,10 +20,13 @@ export class div extends LitElement {
 
             }
             
+            
 
         </style>
         
-        <div ><slot></slot></div>
+        <div  >
+            ${this.email}
+        <slot></slot></div>
         
         
     `;

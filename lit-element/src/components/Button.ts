@@ -14,6 +14,7 @@ export class Button extends LitElement {
                 padding: 0.5rem;
                 border: 0;
             }
+            
         </style>
         <button @focus="${this.onFocus.bind(this)}">${this.label}</button>
     `;
