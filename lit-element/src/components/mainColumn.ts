@@ -1,7 +1,7 @@
-import { LitElement, html, customElement, property } from 'lit-element';
+import { LitElement, html, customElement} from 'lit-element';
 @customElement('main-column')
 export class div extends LitElement {
-  @property() id='';
+
 
   render() {
     return html`
@@ -14,14 +14,13 @@ export class div extends LitElement {
                 align-items:center;
 
             }
-            #hidden{display:none;}
-            #shown{display:block;}
+           
 
             
              
         </style>
         
-        <div id=${this.id}><slot></slot></div>
+        <div><slot></slot></div>
         
         
     `;
