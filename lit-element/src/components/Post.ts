@@ -2,7 +2,7 @@ import { LitElement, html, css, customElement, property } from "lit-element";
 
 type IPost = {
   heading: string;
-  sentance: string;
+  sentence: string;
 };
 
 @customElement("frida-post")
@@ -18,7 +18,7 @@ export class Post extends LitElement {
 
   render() {
     return html`
-      <h3>${this.post?.heading}</h3><p>${this.post?.sentance}</p>
+      <h3>${this.post?.heading}</h3><p>${this.post?.sentence}</p>
     `;
   }
 }

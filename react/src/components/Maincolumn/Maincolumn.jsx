@@ -1,11 +1,18 @@
 import React from 'react';
 import './Maincolumn.css';
+import PropTypes from 'prop-types';
 
-export default class Main extends React.Component {
+export default class Maincolumn extends React.Component {
+    static propTypes = {
+        children: PropTypes.oneOfType([
+            PropTypes.arrayOf(PropTypes.node),
+            PropTypes.node
+        ])
+      };
  
-
   render() {
-    return <div><slot></slot></div>;
+    
+    return <div>{this.props.children}</div>;
   }
 }
 

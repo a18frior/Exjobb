@@ -10,7 +10,7 @@ import "./components/Search";
 
 type Post = {
   heading: string;
-  sentance: string;
+  sentence: string;
 };
 
 @customElement("frida-app")
@@ -37,7 +37,7 @@ export class App extends LitElement {
     if (this.state.page === "post") {
       const posts = [];
       for (const post of this.getPosts()) {
-        if (!this.state.search || post.heading.includes(this.state.search) || post.sentance.includes(this.state.search)) {
+        if (!this.state.search || post.heading.includes(this.state.search) || post.sentence.includes(this.state.search)) {
           posts.push(html`<frida-post .post="${post}"></frida-post>`);
         }
       }
@@ -136,7 +136,7 @@ export class App extends LitElement {
     for (let index=0; index<headings.length; index++){
       newPosts.push(<Post>{
         heading: headings[index],
-        sentance: sentences[index]
+        sentence: sentences[index]
       });
     }
     window.sessionStorage.setItem('posts', JSON.stringify(newPosts));

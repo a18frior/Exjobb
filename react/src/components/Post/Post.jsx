@@ -1,20 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Post.css';
 
   
 export default class Post extends React.Component {
 
-    Post = (heading,sentence)=>{
-        this.heading=heading;
-        this.sentance=sentence;
-    }
-     
-   
-  
- 
+    static propTypes = {
+        post: PropTypes.object
+    };
 
   render() {
-    <div><h3>${this.Post.heading}</h3><p>${this.Post.sentence}</p></div>
+    return <div><h3>{this.props.post?.heading}</h3><p>{this.props.post?.sentence}</p></div>;
   }
 } 
 

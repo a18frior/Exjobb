@@ -39,15 +39,15 @@ export class Input extends LitElement {
 
             
         </style>
-      <input type="text" label="Email"  name="email" @input="${this.validateE}" />Email:
+      Email:<input type="text" label="Email"  name="email" @input="${this.validateE}" />
       <p>${this.valueMessage}</p>
-      <input type="text" label="Password"  name="password" @input="${this.validateP}"  />Password
+      Password:<input type="text" label="Password"  name="password" @input="${this.validateP}"  />
       <p>${this.valueMessage2}</p>
-      <input type="text" label="Name" name="name" @input="${this.validateN}" />Name:
+      Name:<input type="text" label="Name" name="name" @input="${this.validateN}" />
       <p>${this.valueMessage3}</p>
-      <input type="text" label="Surname" name="surname" @input="${this.validateS}"  />Surname 
+      Surname:<input type="text" label="Surname" name="surname" @input="${this.validateS}"  />
       <p>${this.valueMessage4}</p>
-      <input type="Date" label="Age" name="age" @input="${this.validateA}"  /> Date of birth:
+      Date of birth:<input type="Date" label="Age" name="age" @input="${this.validateA}"  /> 
       <p>${this.valueMessage5}</p>
       <frida-button @click="${this.submit.bind(this)}" .label="Klicka"></frida-button>
       

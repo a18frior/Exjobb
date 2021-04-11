@@ -1,69 +1,108 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Input.css';
 
 export default class Input extends React.Component {
-   setName= useState('');
-    inputValue;
-    inputValue2;
-    inputValue3;
-    inputValue4;
-    inputValue5;
-    valueMessage;
-    valueMessage2;
-    valueMessage3;
-    valueMessage4;
-    valueMessage5;
-    greenMode;
-    redMode;
-  
-  
-  
-   validateP(e){
-    this.inputValue2 = e.srcElement.value
-   if(this.inputValue2.length> 6){
+    static propTypes = {
+        onSubmit: PropTypes.func   
+    }
+   
+    name = null;
+    inputValue= null;
+    inputValue2= null;
+    inputValue3 = null;
+    inputValue4= null;
+    inputValue5= null;
+    valueMessage= null;
+    valueMessage2 =null;
+    valueMessage3= null;
+    valueMessage4 = null;
+    valueMessage5= null;
+    greenMode = false;
+    redMode = false;
     
+
+    constructor(){
+        super();
+            this.state = {
+                email: "Email",
+                password:"Password",
+                age: "" ,
+                name: "Name",
+                surname: "Surname"
+            };
+            this.onInputchange = this.onInputchange.bind(this);
+            this.validateE= this.validateE.bind(this);
+            this.validateP= this.validateP.bind(this);
+            this.validateN= this.validateN.bind(this);
+            this.validateS= this.validateS.bind(this);
+            this.validateA= this.validateA.bind(this);
+    }
+    onInputchange(event) {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+        
+      }
+  
+  
+  
+
+
+    render() {
+        const {items}=this.state
+    return <div> <input type="text" label="Email"  name="email" value={this.state.email} onChange={this.onInputchange} onInput={this.validateE} /> <p>{this.valueMessage}</p>
+    <input type="text" label="Password"  name="password" value={this.state.password} onChange={this.onInputchange} onInput={this.validateP} />
+    <p>{this.valueMessage2}</p>
+    <input type="text" label="Name" name="name" value={this.state.name} onChange={this.onInputchange}  onInput={event=> this.validateN} />
+    <p>{this.valueMessage3}</p>
+    <input type="text" label="Surname" name="surname" value={this.state.surname} onChange={this.onInputchange} onInput={this.validateS}  />
+    <p>{this.valueMessage4}</p>
+    <input type="Date" label="Age" name="age" value={this.state.age} onChange={this.onInputchange}  onInput={this.validateA} /> 
+    <p>{this.valueMessage5}</p>
+    <button onClick={this.submit.bind(this)}>Submit</button></div>
+
+  }
+  validateP(){
+    this.inputValue2 = this.state.password;
+   if(this.inputValue2.length> 6){
+    this.greenMode=true;
+       this.redMode=false; 
       
-      this.valueMessage2="Godkänt lösenord";
-      this.update(this.valueMessage2)
    }
       
     else{
       this.valueMessage2="lösenord ska vara minst 6";
-      this.update(this.valueMessage2)
+      this.greenMode=false;
+      this.redMode=true;
     }
    }
   
-  
 
-  
-  validateE(e){
-    this.inputValue = e.srcElement.value
+  validateE(){
+    this.inputValue =this.state.email;
+    console.log(this.state.email);
+    console.log(this.inputValue);
    if(this.inputValue.length> 15){
     const re = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     re.test(this.inputValue);
     if (re.test(this.inputValue)==true){
     
        this.greenMode=true;
-       this.redMode=false;
-
-       console.log(this.greenMode);
-       
-      
-       
-       
+       this.redMode=false;  
     }
     else{ 
       this.valueMessage="Exempel: email@email.com";
       this.greenMode=false;
       this.redMode=true;
-      this.update(this.valueMessage)
-      console.log(this.greenMode);
+      
+     
       
     }
    }
   }
-   validateA(e){
-    this.inputValue5 = e.srcElement.value
+   validateA(){
+    this.inputValue5 = this.state.age;
 
 
     const inputDate = new Date(this.inputValue5);
@@ -71,73 +110,63 @@ export default class Input extends React.Component {
     const max_Date= new Date(todayDate.getFullYear() - 18, todayDate.getMonth(), todayDate.getDate());
   
    if(max_Date.getTime() > inputDate.getTime()){
-    
+    this.greenMode=true;
+        this.redMode=false;
       
-      this.valueMessage5="Godkänd ålder";
-      this.update(this.valueMessage5)
+      
     }
     else{ 
       this.valueMessage5="Måste vara över 18";
-      this.update(this.valueMessage5)
+      this.greenMode=false;
+        this.redMode=true;
+     
     }
    }
   
-   validateN(e){
-    this.inputValue3 = e.srcElement.value
+   validateN(){
+    this.inputValue3 = this.state.name;
    if(this.inputValue.length> 3){
     const re = /^([A-Z][a-zA-Z]*)/;
     re.test(this.inputValue3);
     if (re.test(this.inputValue3)==false){
-      
-      this.valueMessage3="godkänt namn";
-      this.update(this.valueMessage3)
-      setName(e);
+        this.greenMode=true;
+        this.redMode=false;
+     
+      this.name = this.inputValue3;
       
     }
     else{ 
       this.valueMessage3="Bara bokstäver";
-      this.update(this.valueMessage3)
+      this.greenMode=false;
+        this.redMode=true;
     }
    }}
 
-   validateS(e){
-    this.inputValue4 = e.srcElement.value
+   validateS(){
+    this.inputValue4 = this.state.surname;
    if(this.inputValue4.length> 3){
     const re = /^([A-Z][a-zA-Z]*)/;
     re.test(this.inputValue4);
     if (re.test(this.inputValue4)==false){
-      
-      this.valueMessage4="Godkänt namn";
-      this.update(this.valueMessage4)
+        this.greenMode=true;
+        this.redMode=false;
+    
     }
-    else{ 
+    else{  
+        this.greenMode=false;
+        this.redMode=true;
+
       this.valueMessage4="Bara bokstäver";
-      this.update(this.valueMessage4)
+      
     }
    }
   }
   submit(){
-    this.dispatchEvent(new CustomEvent('submit', {
-      detail: {
-        name: this.setName
+      if(this.greenMode && !this.redMode) {
+        this.props.onSubmit({ 
+            name: this.state.name
+        })
       }
-    }));
-  
-  }
-
-
-    render() {
-    return <div> <input type="text" label="Email"  name="email" oninput= {event => validateE(event.target.value)} />Email: <p>${this.valueMessage}</p>
-    <input type="text" label="Password"  name="password" oninput={event => validateP(event.target.value)} />Password
-    <p>${this.valueMessage2}</p>
-    <input type="text" label="Name" name="name" oninput={event => validateN(event.target.value)} />Name:
-    <p>${this.valueMessage3}</p>
-    <input type="text" label="Surname" name="surname" oninput={event => validateS(event.target.value)}  />Surname 
-    <p>${this.valueMessage4}</p>
-    <input type="Date" label="Age" name="age" oninput={event => validateA(event.target.value)} /> Date of birth:
-    <p>${this.valueMessage5}</p>
-    <frida-button onclick={this.submit.bind(this)}></frida-button></div>
-
   }
   }
 

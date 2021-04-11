@@ -1,56 +1,135 @@
 import React, { useState } from 'react';
 import ReactDOM, { render } from 'react-dom';
-import Input from "./components/Input";
-import Form from"./components/Form";
-import Side from"./components/Sidecolumn";
-import Main from "./components/Maincolumn";
-import Post from"./components/Post";
-import Search from"./components/Search";
-import getPost from "./components/getPost"
+import Input from "./components/input/Input";
+import Form from"./components/form/Form";
+import Sidecolumn from"./components/sidecolumn/Sidecolumn";
+//import Maincolumn from "./components/maincolumn/Maincolumn";
+import Post from"./components/post/Post";
+import Search from"./components/search/Search";
+import * as FreeGrammar from "./libs/FreeGrammar";
+import Maincolumn from './components/Maincolumn/Maincolumn';
 
-post = (heading,sentence)=>{
-    this.heading=heading;
-    this.sentence=sentence;
-}
+export default class App extends React.Component {
+    state = {
+        page: null,
+        search: null,
+        inputForm: {
+            name: null
+        },
+    };
 
- State= (page,search,inputForm)=>{
-    this.page=page
-    this.search=search
-    this.inputForm=inputForm} 
-
-    State.page=null;
-    State.search=null;
-    State.inputForm=(name)=>{
-        this.name=name
+    render() {
+        
+        if (this.state.page === "post") {
+            const postObjects = this.getPosts();
+            const posts = [];
+            for(let i = 0; i < postObjects.length; i++) {
+                if (!this.state.search || postObjects[i].heading.includes(this.state.search) || postObjects[i].sentence.includes(this.state.search)) {
+                    posts.push(<Post key={i} post={postObjects[i]}/>);
+                  }
+            }
+         return(
+           <div><Search onSearch={(event) => {
+                this.state.search = event.search;
+                this.forceUpdate();
+           }} value={this.state.search}></Search>
+              <Sidecolumn></Sidecolumn>
+              <Maincolumn> {posts} </Maincolumn>
+              <Sidecolumn></Sidecolumn></div>);
+        }
+             
+          
+        return (
+            <div>
+            <Sidecolumn></Sidecolumn>
+            <Maincolumn>
+              <Form>
+                <Input onSubmit={(name) => {
+                this.state.page="post";
+                this.state.inputForm.name = name;
+                this.forceUpdate();
+              }}
+                ></Input>
+             </Form>
+            </Maincolumn>
+            <Sidecolumn></Sidecolumn></div>);
+        
     }
-    if (this.State.page === "post") {
-        const posts = [];
-        for (const post of getPost.getPost()) {
-          if (!this.state.search || post.heading.includes(this.state.search) || post.sentance.includes(this.state.search)) {
-            posts.push(<Post>{Post=post}</Post>);
+
+       getPosts() {
+        
+    
+        const posts = window.sessionStorage.getItem("posts");
+        if (posts) {
+          return JSON.parse(posts);
+        }
+        let random = null;
+        let random2 = null;
+        let heading = null;
+        let sentence = null;
+        let paragraf = null;
+        const headings = [];
+        const sentences = [];
+        for (let index = 0; index < 1000; index++) {
+          random = FreeGrammar.getRandomInt(1, 4);
+          for (let index = 0; index < random; index++) {
+            heading = FreeGrammar.generate_sentence(
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            );
+            headings.push(heading);
+    
+            random2 = FreeGrammar.getRandomInt(3, 20);
+    
+            for (let index = 0; index < random2; index++) {
+              sentence = FreeGrammar.generate_sentence(
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+              );
+    
+              if (index <= 1) {
+                paragraf = sentence;
+              }
+              if (index > 1) {
+                paragraf += sentence;
+              }
+    
+              if (index % 12 === 0) {
+                sentences.push(paragraf);
+                paragraf = "";
+              }
+            }
           }
         }
-    ReactDOM.render(
-       <div><Search search={(event) =>{State.search = event.detail.search;
-              this.requestUpdate();}}></Search>
-          <Side></Side>
-          <Main> {posts} </Main>
-          <Side></Side></div> ,document.getElementById('app')); npm
-    }
-     
-  
-ReactDOM.render(
-    <div>
-    <Side></Side>
-    <Main>
-      <Form>
-        <Input
-          onsubmit={(event) => {
-            this.State.page = "post";
-            this.State.inputForm.name = event.detail.email;
-            this.requestUpdate();
-          }}
-        ></Input>
-      </Form>
-    </Main>
-    <Side></Side></div> ,document.getElementById('app')); npm
+        const newPosts = [];
+        for (let index=0; index<headings.length; index++){
+          newPosts.push({
+            heading: headings[index],
+            sentence: sentences[index]
+          });
+        }
+        window.sessionStorage.setItem('posts', JSON.stringify(newPosts));
+        return newPosts;
+      }
+}
+
+
+ReactDOM.render(<App/>, document.getElementById('app'));
