@@ -17,19 +17,22 @@ type Post = {
 export class App extends LitElement {
   public static styles = css`
     :host {
+      font-family: Arial, Helvetica, sans-serif;
       width: 100%;
-      display: block;
+      display: flex;
+      flex-direction:row;
     }
+  
   `;
   private state: {
     page: string | null;
     search: string | null;
-    inputForm: { email: string | null };
+    inputForm: { name: string | null };
   } = {
     page: null,
     search: null,
     inputForm: {
-      email: null,
+      name: null,
     },
   };
 
@@ -48,8 +51,8 @@ export class App extends LitElement {
             this.requestUpdate();
           }}"
         ></frida-search>
-        ${posts}
-        <side-column .email="${this.state.inputForm.email}"></side-column>
+        
+        <side-column .name="${this.state.inputForm.name}"></side-column>
         <main-column> ${posts} </main-column>
         <side-column></side-column>
       `;
@@ -61,7 +64,7 @@ export class App extends LitElement {
           <frida-input
             @submit="${(event: CustomEvent) => {
               this.state.page = "post";
-              this.state.inputForm.email = event.detail.email;
+              this.state.inputForm.name = event.detail.name;
               this.requestUpdate();
             }}"
           ></frida-input>

@@ -1,5 +1,5 @@
-button {
-    background: whitesmoke;
-    padding: 0.5rem;
-    border: 0;
-}
+div {
+    margin: 20px;
+    display: block;
+ }
+ button{background-color:white; padding:5px; margin-top: 5px;}

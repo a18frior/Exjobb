@@ -1,21 +1,21 @@
-import { LitElement, html, customElement } from 'lit-element';
+import { LitElement, html,css, customElement } from 'lit-element';
 
 
 @customElement('frida-search')
 export class Search extends LitElement {
+  public static styles = css`
+  :host {
+     margin: 20px;
+     display: block;
+  }
+  button{background-color:white; padding:5px; margin-top: 5px;}
+`;
   render() {
     return html`
-        <style>
-            
-            button {
-                background: whitesmoke;
-                padding: 0.5rem;
-                border: 0;
-            }
-            
-        </style>
-        <input/>
-        <button @click="${this.onClick.bind(this)}">Search</button>
+ 
+
+        <input id="search"/>
+        <button id="submit" @click="${this.onClick.bind(this)}">Search</button>
     `;
   }
 

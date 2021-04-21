@@ -3,12 +3,11 @@ import ReactDOM, { render } from 'react-dom';
 import Input from "./components/input/Input";
 import Form from"./components/form/Form";
 import Sidecolumn from"./components/sidecolumn/Sidecolumn";
-//import Maincolumn from "./components/maincolumn/Maincolumn";
 import Post from"./components/post/Post";
 import Search from"./components/search/Search";
 import * as FreeGrammar from "./libs/FreeGrammar";
 import Maincolumn from './components/Maincolumn/Maincolumn';
-
+import "./components/App.css"
 export default class App extends React.Component {
     state = {
         page: null,
@@ -19,7 +18,13 @@ export default class App extends React.Component {
     };
 
     render() {
-        
+      
+      let style={
+        width: "100%",
+        display:"flex",
+        flexDirection: "row"
+      }
+      
         if (this.state.page === "post") {
             const postObjects = this.getPosts();
             const posts = [];
@@ -29,18 +34,18 @@ export default class App extends React.Component {
                   }
             }
          return(
-           <div><Search onSearch={(event) => {
+           <div id="content" style={style}><Search onSearch={(event) => {
                 this.state.search = event.search;
                 this.forceUpdate();
            }} value={this.state.search}></Search>
-              <Sidecolumn></Sidecolumn>
+              <Sidecolumn  ></Sidecolumn>
               <Maincolumn> {posts} </Maincolumn>
               <Sidecolumn></Sidecolumn></div>);
         }
              
           
         return (
-            <div>
+            <div id="content" style={style}>
             <Sidecolumn></Sidecolumn>
             <Maincolumn>
               <Form>

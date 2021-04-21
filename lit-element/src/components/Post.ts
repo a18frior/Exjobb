@@ -7,18 +7,22 @@ type IPost = {
 
 @customElement("frida-post")
 export class Post extends LitElement {
+
   public static styles = css`
     :host {
        display: block;
     }
+    div {margin-top:10px;
+      width: 700px;
+       padding: 20px;
+       box-shadow: 2px 5px 5px #888888;}
   `;
+
 
   @property({ type: "object" })
   public post: IPost|null = null;
 
   render() {
     return html`
-      <h3>${this.post?.heading}</h3><p>${this.post?.sentence}</p>
-    `;
-  }
-}
+      <div><h3>${this.post?.heading}</h3><p>${this.post?.sentence}</p></div>`
+  }} 

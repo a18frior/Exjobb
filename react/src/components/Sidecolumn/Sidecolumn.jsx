@@ -15,7 +15,15 @@ export default class Sidecolumn extends React.Component {
 
   render() {
     
-    return <div>{this.props.children}
+    let sideStyle={
+      width:"15%",
+      marginTop:"50px",
+      display:"flex",
+      flexDirection:"column",
+      justifyContent:"center",
+      alignItems: "center"
+    }
+    return <div id="side" style={sideStyle}>{this.props.children}
       
         </div>
   }

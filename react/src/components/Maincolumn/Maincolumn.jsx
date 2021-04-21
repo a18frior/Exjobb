@@ -11,8 +11,16 @@ export default class Maincolumn extends React.Component {
       };
  
   render() {
+    let mainStyle={
+      width:"70%",
+      marginTop:"50px",
+      display:"flex",
+      flexDirection:"column",
+      justifyContent:"center",
+      alignItems: "center"
+    }
     
-    return <div>{this.props.children}</div>;
+    return <div id="main" style={mainStyle}>{this.props.children}</div>;
   }
 }
 

@@ -1,7 +1,148 @@
-import { LitElement, html, customElement} from 'lit-element';
-import './Button';
+import { LitElement, html, css,customElement} from 'lit-element';
+
 @customElement('frida-input')
 export class Input extends LitElement {
+  static get properties() {
+    return {
+      greenMode: {
+        type: Boolean,
+        reflect: true,
+      },
+      redMode: {
+        type: Boolean,
+        reflect: true,
+      },
+      display: {
+        type: Boolean,
+        reflect: true,
+      },
+      greenMode2: {
+        type: Boolean,
+        reflect: true,
+      },
+      redMode2: {
+        type: Boolean,
+        reflect: true,
+      },
+      display2: {
+        type: Boolean,
+        reflect: true,
+      },
+      greenMode3: {
+        type: Boolean,
+        reflect: true,
+      },
+      redMode3: {
+        type: Boolean,
+        reflect: true,
+      },
+      display3: {
+        type: Boolean,
+        reflect: true,
+      },
+      greenMode4: {
+        type: Boolean,
+        reflect: true,
+      },
+      redMode4: {
+        type: Boolean,
+        reflect: true,
+      },
+      display4: {
+        type: Boolean,
+        reflect: true,
+      },
+      greenMode5: {
+        type: Boolean,
+        reflect: true,
+      },
+      redMode5: {
+        type: Boolean,
+        reflect: true,
+      },
+      display5: {
+        type: Boolean,
+        reflect: true,
+      },
+    };
+  }
+  public static styles = css`
+  button{background-color:white; padding:5px; }
+  input {margin-top:10px;
+        border-width:2px;
+        border style:solid;
+        border-color:black;
+  }
+
+  input[greenMode] {
+    border-width:2px;
+        border style:solid;
+        border-color:green;
+  }
+  
+  
+  input[redMode] {
+    border-width:2px;
+        border style:solid;
+        border-color:red;
+  }
+
+  input[greenMode2] {
+    border-width:2px;
+        border style:solid;
+        border-color:green;
+  }
+  
+  
+  input[redMode2] {
+    border-width:2px;
+        border style:solid;
+        border-color:red;
+  }
+  input[greenMode3] {
+    border-width:2px;
+        border style:solid;
+        border-color:green;
+  }
+  
+  
+  input[redMode3] {
+    border-width:2px;
+        border style:solid;
+        border-color:red;
+  }
+  input[greenMode4] {
+    border-width:2px;
+        border style:solid;
+        border-color:green;
+  }
+  
+  input[redMode4] {
+    border-width:2px;
+        border style:solid;
+        border-color:red;
+  }
+  input[greenMode5] {
+    border-width:2px;
+        border style:solid;
+        border-color:green;
+  }
+  input[redMode5] {
+    border-width:2px;
+        border style:solid;
+        border-color:red;
+  }
+
+  p {visibility: hidden;}
+
+  p[display] {visibility: visible;}
+  p[display2] {visibility: visible;}
+  p[display3] {visibility: visible;}
+  p[display4] {visibility: visible;}
+  p[display5] {visibility: visible;}
+
+            
+`;
   inputValue:any;
   inputValue2:any;
   inputValue3:any;
@@ -14,6 +155,20 @@ export class Input extends LitElement {
   valueMessage5: any;
   greenMode: boolean;
   redMode: boolean;
+  display:boolean;
+  greenMode2: boolean;
+  redMode2: boolean;
+  display2:boolean;
+  greenMode3: boolean;
+  redMode3: boolean;
+  display3:boolean;
+  greenMode4: boolean;
+  redMode4: boolean;
+  display4:boolean;
+  greenMode5: boolean;
+  redMode5: boolean;
+  display5:boolean;
+
 
 
 
@@ -21,55 +176,55 @@ export class Input extends LitElement {
    super();
    this.greenMode=false;
    this.redMode=false;
+   this.display=false;
+   this.greenMode2=false;
+   this.redMode2=false;
+   this.display2=false;
+   this.greenMode3=false;
+   this.redMode3=false;
+   this.display3=false;
+   this.greenMode4=false;
+   this.redMode4=false;
+   this.display4=false;
+   this.greenMode5=false;
+   this.redMode5=false;
+   this.display5=false;
   }
-
 
      render() {
     return html`
-        <style>
-            input{margin-top:10px;}
-            :host([greenMode]) .input{
-              border:1px,solid, green;
-            }
-
-            :host([redMode]) .input{
-              border:1px,solid, red;
-            }
-            
-
-            
-        </style>
-      Email:<input type="text" label="Email"  name="email" @input="${this.validateE}" />
-      <p>${this.valueMessage}</p>
-      Password:<input type="text" label="Password"  name="password" @input="${this.validateP}"  />
-      <p>${this.valueMessage2}</p>
-      Name:<input type="text" label="Name" name="name" @input="${this.validateN}" />
-      <p>${this.valueMessage3}</p>
-      Surname:<input type="text" label="Surname" name="surname" @input="${this.validateS}"  />
-      <p>${this.valueMessage4}</p>
-      Date of birth:<input type="Date" label="Age" name="age" @input="${this.validateA}"  /> 
-      <p>${this.valueMessage5}</p>
-      <frida-button @click="${this.submit.bind(this)}" .label="Klicka"></frida-button>
+     
+      Email: <input ?greenMode=${this.greenMode} ?redMode=${this.redMode} id="email" type="text" label="Email"  name="email" @input="${this.validateE}" />
+      <p ?display=${this.display}>${this.valueMessage}</p>
+      Password: <input ?greenMode2=${this.greenMode2} ?redMode2=${this.redMode2} id="password" type="text" label="Password"  name="password" @input="${this.validateP}"  />
+      <p ?display2=${this.display2} >${this.valueMessage2}</p>
+      Name: <input ?greenMode3=${this.greenMode3} ?redMode3=${this.redMode3} id="name" type="text" label="Name" name="name" @input="${this.validateN}" />
+      <p ?display3=${this.display3}>${this.valueMessage3}</p>
+      Surname: <input ?greenMode4=${this.greenMode4} ?redMode4=${this.redMode4} id="surname" type="text" label="Surname" name="surname" @input="${this.validateS}"  />
+      <p ?display4=${this.display4} >${this.valueMessage4}</p>
+      Date of birth: <input ?greenMode5=${this.greenMode5} ?redMode5=${this.redMode5} id="age" type="Date" label="Age" name="age" @input="${this.validateA}"  /> 
+      <p ?display5=${this.display5}>${this.valueMessage5}</p>
+      <button id="submitForm" @click="${this.submit.bind(this)}">Submit</button> 
       
 
   
     `;
- 
    
-    
-      
     }
     validateP(e: { srcElement: { value: string; }; }){
       this.inputValue2 = e.srcElement.value
      if(this.inputValue2.length> 6){
-      
+      this.display2=false;
+      this.greenMode2=true;
+      this.redMode2=false;
         
-        this.valueMessage2="Godkänt lösenord";
-        this.update(this.valueMessage2)
      }
         
       else{
         this.valueMessage2="lösenord ska vara minst 6";
+        this.greenMode2=false;
+        this.redMode2=true;
+        this.display2=true;
         this.update(this.valueMessage2)
       }
      }
@@ -83,42 +238,39 @@ export class Input extends LitElement {
       const re = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
       re.test(this.inputValue);
       if (re.test(this.inputValue)==true){
-      
+         this.display=false;
          this.greenMode=true;
          this.redMode=false;
-
-         console.log(this.greenMode);
-         
-        
-         
-         
       }
       else{ 
         this.valueMessage="Exempel: email@email.com";
         this.greenMode=false;
         this.redMode=true;
+        this.display=true;
         this.update(this.valueMessage)
-        console.log(this.greenMode);
+        
         
       }
      }
     }
      validateA(e: { srcElement: { value: string; }; }){
       this.inputValue5 = e.srcElement.value
-
-
       const inputDate = new Date(this.inputValue5);
       const todayDate = new Date();
       const max_Date= new Date(todayDate.getFullYear() - 18, todayDate.getMonth(), todayDate.getDate());
     
      if(max_Date.getTime() > inputDate.getTime()){
       
+      this.display5=false;
+      this.greenMode5=true;
+      this.redMode5=false;
         
-        this.valueMessage5="Godkänd ålder";
-        this.update(this.valueMessage5)
       }
       else{ 
         this.valueMessage5="Måste vara över 18";
+        this.greenMode5=false;
+        this.redMode5=true;
+        this.display5=true;
         this.update(this.valueMessage5)
       }
      }
@@ -129,11 +281,16 @@ export class Input extends LitElement {
       const re = /^([A-Z][a-zA-Z]*)/;
       re.test(this.inputValue3);
       if (re.test(this.inputValue3)==false){
+        this.display3=false;
+      this.greenMode3=true;
+      this.redMode3=false;
+      
         
-        this.valueMessage3="godkänt namn";
-        this.update(this.valueMessage3)
       }
       else{ 
+        this.greenMode3=false;
+        this.redMode3=true;
+        this.display3=true;
         this.valueMessage3="Bara bokstäver";
         this.update(this.valueMessage3)
       }
@@ -145,24 +302,30 @@ export class Input extends LitElement {
       const re = /^([A-Z][a-zA-Z]*)/;
       re.test(this.inputValue4);
       if (re.test(this.inputValue4)==false){
-        
-        this.valueMessage4="Godkänt namn";
-        this.update(this.valueMessage4)
+       
+        this.display4=false;
+        this.greenMode4=true;
+        this.redMode4=false;
       }
       else{ 
+        this.greenMode4=false;
+        this.redMode4=true;
+        this.display4=true;
         this.valueMessage4="Bara bokstäver";
         this.update(this.valueMessage4)
       }
      }
     }
     submit(){
+      if(this.greenMode===true && this.greenMode2===true && this.greenMode3===true && this.greenMode4===true &&this.greenMode5===true){
       this.dispatchEvent(new CustomEvent('submit', {
         detail: {
-          email: (<HTMLInputElement>this.shadowRoot?.querySelector('input[name="email"]')).value
+          email: (<HTMLInputElement>this.shadowRoot?.querySelector('input[name="name"]')).value
         }
       }));
     }
-  
+    else {alert("Something in the form is wrong")}
+    }
   }
       
       

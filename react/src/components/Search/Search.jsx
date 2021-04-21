@@ -11,7 +11,7 @@ export default class Search extends React.Component {
     search = null;
 
   render() {
-    return <div><input onChange={(event) => this.search = event.target.value}/><button onClick={() => this.props.onSearch({ search: this.search })}>Search</button></div>;
+    return <div ><input id="search" onChange={(event) => this.search = event.target.value}/><button id="submit" onClick={() => this.props.onSearch({ search: this.search })}>Search</button></div>;
   }
 }
 
