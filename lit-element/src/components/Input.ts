@@ -64,6 +64,12 @@ export class Input extends LitElement {
         type: Boolean,
         reflect: true,
       },
+      display6: {
+        type: Boolean,
+        reflect: true,
+      },
+      value:{type:String,
+            reflect:true}
     };
   }
   public static styles = css`
@@ -140,6 +146,7 @@ export class Input extends LitElement {
   p[display3] {visibility: visible;}
   p[display4] {visibility: visible;}
   p[display5] {visibility: visible;}
+  p[display6] {visibility: visible;}
 
             
 `;
@@ -153,6 +160,7 @@ export class Input extends LitElement {
   valueMessage3: any;
   valueMessage4: any;
   valueMessage5: any;
+  valueMessage6: any;
   greenMode: boolean;
   redMode: boolean;
   display:boolean;
@@ -168,6 +176,8 @@ export class Input extends LitElement {
   greenMode5: boolean;
   redMode5: boolean;
   display5:boolean;
+  display6:boolean;
+
 
 
 
@@ -189,30 +199,31 @@ export class Input extends LitElement {
    this.greenMode5=false;
    this.redMode5=false;
    this.display5=false;
+   this.display6=false;
   }
 
      render() {
     return html`
      
-      Email: <input ?greenMode=${this.greenMode} ?redMode=${this.redMode} id="email" type="text" label="Email"  name="email" @input="${this.validateE}" />
+      Email: <input ?greenMode=${this.greenMode} ?redMode=${this.redMode} id="email" type="text" label="Email"  name="email" @change="${this.validateE}" />
       <p ?display=${this.display}>${this.valueMessage}</p>
-      Password: <input ?greenMode2=${this.greenMode2} ?redMode2=${this.redMode2} id="password" type="text" label="Password"  name="password" @input="${this.validateP}"  />
+      Password: <input ?greenMode2=${this.greenMode2} ?redMode2=${this.redMode2} id="password" type="text" label="Password"  name="password" @change="${this.validateP}"  />
       <p ?display2=${this.display2} >${this.valueMessage2}</p>
-      Name: <input ?greenMode3=${this.greenMode3} ?redMode3=${this.redMode3} id="name" type="text" label="Name" name="name" @input="${this.validateN}" />
+      Name: <input ?greenMode3=${this.greenMode3} ?redMode3=${this.redMode3} id="name" type="text" label="Name" name="name" @change="${this.validateN}" />
       <p ?display3=${this.display3}>${this.valueMessage3}</p>
-      Surname: <input ?greenMode4=${this.greenMode4} ?redMode4=${this.redMode4} id="surname" type="text" label="Surname" name="surname" @input="${this.validateS}"  />
+      Surname: <input ?greenMode4=${this.greenMode4} ?redMode4=${this.redMode4} id="surname" type="text" label="Surname" name="surname" @change="${this.validateS}"  />
       <p ?display4=${this.display4} >${this.valueMessage4}</p>
-      Date of birth: <input ?greenMode5=${this.greenMode5} ?redMode5=${this.redMode5} id="age" type="Date" label="Age" name="age" @input="${this.validateA}"  /> 
+      Date of birth: <input ?greenMode5=${this.greenMode5} ?redMode5=${this.redMode5} id="age" type="Date" label="Age" name="age" @change="${this.validateA}"  /> 
       <p ?display5=${this.display5}>${this.valueMessage5}</p>
       <button id="submitForm" @click="${this.submit.bind(this)}">Submit</button> 
-      
+      <p ?display6=${this.display6}>${this.valueMessage6}</p>
 
   
     `;
    
     }
     validateP(e: { srcElement: { value: string; }; }){
-      this.inputValue2 = e.srcElement.value
+      this.inputValue2 = e.srcElement.value;
      if(this.inputValue2.length> 6){
       this.display2=false;
       this.greenMode2=true;
@@ -318,13 +329,18 @@ export class Input extends LitElement {
     }
     submit(){
       if(this.greenMode===true && this.greenMode2===true && this.greenMode3===true && this.greenMode4===true &&this.greenMode5===true){
+        this.display6=false; 
       this.dispatchEvent(new CustomEvent('submit', {
         detail: {
           email: (<HTMLInputElement>this.shadowRoot?.querySelector('input[name="name"]')).value
-        }
+        },
       }));
     }
-    else {alert("Something in the form is wrong")}
+    else {
+      this.display6=true;
+      this.valueMessage6="Något är fel i formuläret";
+      this.update(this.valueMessage6)
+      }
     }
   }
       
