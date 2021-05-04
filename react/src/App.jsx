@@ -75,7 +75,7 @@ export default class App extends React.Component {
         let paragraf = null;
         const headings = [];
         const sentences = [];
-        for (let index = 0; index < 1000; index++) {
+        for (let index = 0; index < 2000; index++) {
           random = FreeGrammar.getRandomInt(1, 4);
           for (let index = 0; index < random; index++) {
             heading = FreeGrammar.generate_sentence(
